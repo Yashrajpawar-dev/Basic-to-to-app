@@ -7,18 +7,26 @@ const addbutton = document.getElementById("add-button");
 
 addbutton.addEventListener('click', function(e){
   const text = taskInput.value.trim();
-    if(text ""){
+    if(text === ""){
     alert("Enter the task!")
     return;
 }else{
+   
     addNewTask()
+    taskInput.value = '';
+    updateLocalStorage()
+   
 }
 })
 
 
  function addNewTask(){
 const li = document.createElement('li')
-li.innerText = taskInput.value
+ li.className = 'task'; 
+li.innerText = `
+      <span class="task-text">${text}</span>
+      <button class="delete-button" aria-label="Delete task">✖</button>
+    `;
 taskList.appendChild(li)
 taskInput.value   = ""
 updateLocalStorage()
@@ -46,10 +54,11 @@ function createTask(taskInput) {
   `;
   taskList.appendChild(li);
 }
- function updateLocalStorage(){
- localStorage.setItem("data", taskList.innerHTML)
- }
+function updateLocalStorage() {
+    localStorage.setItem('tasks', taskList.innerHTML);
+  }
  function displayTask(){
-    taskList.innerHTML = localStorage.getItem('data')
+    const saved = localStorage.getItem('tasks');
+    if (saved) taskList.innerHTML = saved;
  }
  displayTask();
