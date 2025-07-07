@@ -90,3 +90,4 @@ body {
 .delete-button:hover {
   background: #c82333;
 }
+.completed .task-text { text-decoration: line-through; opacity: .6; }
